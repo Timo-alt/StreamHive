@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #111111;
+    color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: #222222;
+    padding: 48px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Styling gebaseerd op image_48bfb0.png */
+.header-section {
+    margin-bottom: 32px;
+}
+
+.subtitle {
+    display: block;
+    color: #666666;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #F5F5F5;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+
+.header-section p {
+    color: #666666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Formulier elementen */
+.input-group {
+    margin-bottom: 24px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #F5F5F5;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    background-color: #111111;
+    border: 1px solid #222222;
+    border-radius: 4px;
+    color: #F5F5F5;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #FF0000;
+}
+
+.login-button {
+    width: 100%;
+    padding: 16px;
+    background-color: #FF0000;
+    border: none;
+    border-radius: 4px;
+    color: #F5F5F5;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.login-button:hover {
+    background-color: #cc0000;
+}
+
+.footer-links {
+    margin-top: 24px;
+    text-align: left;
+    font-size: 14px;
+    color: #666666;
+}
+
+.footer-links a {
+    color: #FF0000;
+    text-decoration: none;
+    margin-left: 4px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
