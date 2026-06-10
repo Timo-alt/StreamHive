@@ -1,14 +1,18 @@
 <!-- De code die wordt gebruikt voor de gebruikers 
- De code hierin is voor inloggen, regristreren, videos uploaden en pofiel foto veranderen
+ De code hierin is voor inloggen, regristreren en pofiel foto veranderen
 -->
 <?php
-# Voegt de database uit database.php toe aan deze code
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Voegt de database uit database.php toe aan deze code
 require_once __DIR__ . '/../../core/database.php';
 
 // Meldingen worden in html getoond
 $feedbackMessage = "";
 
-// Wanneer de gebruiker heeft gerigistreerd wordt dit geschreven in de login pagina
+// Wanneer de gebruiker heeft geregistreerd wordt dit geschreven in de login pagina
 if (isset($_GET['registration']) && $_GET['registration'] === 'success') {
     $feedbackMessage = "<p style='color: green;'>Registratie succesvol! Je kunt nu inloggen.</p>";
 }
@@ -53,11 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         elseif (isset($_POST['action']) && $_POST['action'] === 'login') {
             if (!empty($_POST['username']) && !empty($_POST['password'])) {
                 
-                $loginInput = $_POST['username']; // Dit kan een gebruikersnaam of e-mail zijn
+                $loginInput = $_POST['username']; // Hier kan de gebruikersnaam of email in worden teogevoegd
                 $password = $_POST['password'];
 
-                // Wordt gezocht in beide kolommen naar de gebruikersnaam of email adres
-                $stmt = $conn->prepare("SELECT `password` FROM users WHERE `email` = :input OR username = :input");
+                // Haalt id en username uit de database
+                $stmt = $conn->prepare("SELECT `id`, `username`, `password` FROM users WHERE `email` = :input OR username = :input");
                 $stmt->bindParam(':input', $loginInput);
                 $stmt->execute();
 
@@ -66,7 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $hashedPassword = $row['password'];
 
                     if (password_verify($password, $hashedPassword)) {
-                        // Als er succesvol is ingelogd wordt de gebruiker doorgestuurd naar index.php
+                        
+                        // Slaat gegevens van de ingelogde gebruiker op in een sessie
+                        $_SESSION['user_id'] = $row['id'];
+                        $_SESSION['username'] = $row['username'];
+
                         header("Location: ../public/index.php");
                         exit();
                     } else {
